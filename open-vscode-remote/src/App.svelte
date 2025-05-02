@@ -4,6 +4,7 @@
   let sshName = "ssh-host";
   let path = "/path/to/project";
   $: address = `vscode://vscode-remote/ssh-remote+${sshName}/${path}?windowId=_blank`;
+  $: localAddress = `vscode://file/${path}?windowId=_blank`;
   let sshHistory: string[] = [];
   let pathHistory: string[] = [];
 
@@ -46,7 +47,8 @@
     updateHistory(Field.path, path);
 
     window.open(
-      `vscode://vscode-remote/ssh-remote+${sshName}/${path}?windowId=_blank`
+      `vscode://vscode-remote/ssh-remote+${sshName}/${path}?windowId=_blank`,
+      "_self",
     );
   };
 
@@ -61,6 +63,11 @@
     navigator.clipboard.writeText(address);
     alert(`Copied ${address} to clipboard`);
   };
+
+  const copyLocalAddress = () => {
+    navigator.clipboard.writeText(localAddress);
+    alert(`Copied ${localAddress} to clipboard`);
+  }
 </script>
 
 <main>
@@ -113,6 +120,7 @@
   <div style="display: flex">
     <button on:click={open}>Open</button>
     <button on:click={copyAddress}>Copy</button>
+    <button on:click={copyLocalAddress}>Copy Local</button>
   </div>
 </main>
 
