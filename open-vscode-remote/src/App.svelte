@@ -46,10 +46,7 @@
     updateHistory(Field.sshName, sshName);
     updateHistory(Field.path, path);
 
-    window.open(
-      `vscode://vscode-remote/ssh-remote+${sshName}/${path}?windowId=_blank`,
-      "_self",
-    );
+    window.open(`vscode://vscode-remote/ssh-remote+${sshName}/${path}?windowId=_blank`, "_self");
   };
 
   const clearHistory = () => {
@@ -67,7 +64,7 @@
   const copyLocalAddress = () => {
     navigator.clipboard.writeText(localAddress);
     alert(`Copied ${localAddress} to clipboard`);
-  }
+  };
 </script>
 
 <main>
@@ -85,13 +82,7 @@
   <!-- Field to enter ssh host name -->
   <div>
     <label for="ssh-name">SSH Name</label>
-    <input
-      type="text"
-      id="ssh-name"
-      bind:value={sshName}
-      autocomplete="on"
-      list="ssh-history"
-    />
+    <input type="text" id="ssh-name" bind:value={sshName} autocomplete="on" list="ssh-history" />
     <datalist id="ssh-history">
       {#each sshHistory as item (item)}
         <option value={item}> </option>
@@ -102,13 +93,7 @@
   <!-- Field to enter path -->
   <div>
     <label for="path">Path</label>
-    <input
-      type="text"
-      id="path"
-      bind:value={path}
-      autocomplete="on"
-      list="path-history"
-    />
+    <input type="text" id="path" bind:value={path} autocomplete="on" list="path-history" />
     <datalist id="path-history">
       {#each pathHistory as item (item)}
         <option value={item}> </option>
@@ -121,6 +106,14 @@
     <button on:click={open}>Open</button>
     <button on:click={copyAddress}>Copy</button>
     <button on:click={copyLocalAddress}>Copy Local</button>
+  </div>
+
+  <!-- Interactive Results -->
+  <div style="text-align: center;">
+    <h2>SSH</h2>
+    <p>{address}</p>
+    <h2>Local</h2>
+    <p>{localAddress}</p>
   </div>
 </main>
 
