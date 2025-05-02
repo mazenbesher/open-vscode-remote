@@ -9,6 +9,7 @@ jobs:
         with:
           bun-version: 1.2.2
       - run: bun install
+        working-directory: ./open-vscode-remote
       - run: bun run build
         working-directory: ./open-vscode-remote
       - uses: actions/upload-pages-artifact@v3
